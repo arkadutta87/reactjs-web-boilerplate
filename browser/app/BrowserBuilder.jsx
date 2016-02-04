@@ -1,0 +1,42 @@
+// static includes
+import jQuery from 'jquery';
+window.$ = window.jQuery = jQuery;
+
+import 'velocity-animate';
+
+if (!window.jQuery.Velocity) {
+    window.jQuery.Velocity = window.Velocity;
+}
+
+import 'velocity-animate/velocity.ui.js';
+
+import _ from 'lodash';
+
+import React from 'react';
+import { render } from 'react-dom';
+import { Router, browserHistory } from 'react-router';
+
+import FluxController from './../../lib/app/flux/FluxController';
+
+import RestClient from './RestClient';
+
+const DefaultProperties = {native: false, platform: 'browser'};
+
+export default function (appRoutes, properties) {
+    properties = !!properties ? _.extend(DefaultProperties, properties) : DefaultProperties;
+
+    const fluxController = new FluxController(properties);
+
+    const fluxContext = fluxController.fluxContext;
+
+    fluxContext.restClient = new RestClient({
+        cookieUrl: '/',
+        baseUrl: '',
+        minErrorCode: 400,
+        json: true,
+        withCredentials: true
+    });
+
+    const createFluxComponent = (Component, props) => <Component {...props} fluxController={fluxController}/>;
+    render((<Router history={browserHistory} createElement={createFluxComponent}>{appRoutes}</Router>), document.getElementById('__page_root__'));
+}
