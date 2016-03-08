@@ -22,10 +22,8 @@ import RestClient from './RestClient';
 
 const DefaultProperties = {native: false, platform: 'browser'};
 
-export default function (appRoutes, properties) {
-    properties = !!properties ? _.extend(DefaultProperties, properties) : DefaultProperties;
-
-    const fluxController = new FluxController(properties);
+export default function (routes) {
+    const fluxController = new FluxController(DefaultProperties);
 
     const fluxContext = fluxController.fluxContext;
 
@@ -38,5 +36,5 @@ export default function (appRoutes, properties) {
     });
 
     const createFluxComponent = (Component, props) => <Component {...props} fluxController={fluxController}/>;
-    render((<Router history={browserHistory} createElement={createFluxComponent}>{appRoutes}</Router>), document.getElementById('__page_root__'));
+    render((<Router history={browserHistory} createElement={createFluxComponent}>{routes}</Router>), document.getElementById('__page_root__'));
 }

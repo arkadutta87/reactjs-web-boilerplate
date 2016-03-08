@@ -12,14 +12,9 @@ export default class FluxStore {
         this.fluxController = _fluxController;
         this.eventEmitter = new Events.EventEmitter();
 
-        const selector = '#' + _key;
-
-        if (typeof window !== 'undefined' && $(selector).length && !(_.isEmpty($(selector).html()))) {
-            const obj = JSON.parse($(selector).html());
-
-            // TODO: we delete the DOM cache node...
-            //$(selector).remove();
-            this.updateData(Immutable.fromJS(obj.data), true);
+        if (typeof window !== 'undefined' && window.fluxStores && window.fluxStores[_key]) {
+            const obj = window.fluxStores[_key];
+            this.updateData(Immutable.fromJS(obj), true);
         }
 
         return this;
@@ -62,10 +57,6 @@ export default class FluxStore {
     }
 
     _render() {
-        const toSerialize = {
-            data: this.data
-        };
-
-        return (<script type="application/json" id={this.id} dangerouslySetInnerHTML={{__html: JSON.stringify(toSerialize)}}></script>);
+        return this.data && this.data.toJS();
     }
 }
