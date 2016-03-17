@@ -1,6 +1,6 @@
 import React from 'react';
 
 export default (props) =>
-  (<div className="col s24 m16 l12 mid-section">
+  (<div className="col m4 l6 right-section">
       {props.children}
   </div>);

@@ -34,8 +34,12 @@ export default class FluxStore {
         this.eventEmitter.removeListener(event, listener);
     }
 
-    emitUpdate() {
-        this.emit('update');
+    emitUpdate(event) {
+        if (event) {
+            this.emit(`UPDATE:${event}`);
+        }
+
+        this.emit('update', event);
     }
 
     addUpdateListener(listener) {
@@ -46,11 +50,11 @@ export default class FluxStore {
         this.removeListener('update', listener);
     }
 
-    updateData(data, noEmit) {
+    updateData(data, event, noEmit) {
         this.data = data;
 
         if (!noEmit) {
-            this.emitUpdate();
+            this.emitUpdate(event);
         }
 
         return this;

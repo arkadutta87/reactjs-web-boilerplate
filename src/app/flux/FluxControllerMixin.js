@@ -71,7 +71,11 @@ export default {
     },
 
     registerStores(storeConfigs) {
-        _.map(storeConfigs, (config, key) => this.registerStore(key, config));
+        if (_.isArray(storeConfigs)) {
+            _.map(storeConfigs, (key) => this.registerStore(key));
+        } else if (_.isObject(storeConfigs)) {
+            _.map(storeConfigs, (config, key) => this.registerStore(key, config));
+        }
     },
 
     getStoresDataAsState() {

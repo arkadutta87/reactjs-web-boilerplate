@@ -43,10 +43,10 @@ export default class FluxController {
         delete this.stores[key];
     }
 
-    createStore(StoreClass, key) {
+    createStore(StoreClass, key, ...params) {
         let store = this.stores[key];
         if (!store) {
-            store = this.stores[key] = new StoreClass(key, this.fluxContext, this);
+            store = this.stores[key] = new StoreClass(key, this.fluxContext, this, ...params);
         }
 
         return store;

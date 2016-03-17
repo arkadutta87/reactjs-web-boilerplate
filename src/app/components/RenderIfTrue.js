@@ -1,3 +1,9 @@
 import React from 'react';
 
-export default (props) => (props.if ? props.children : <noscript/>);
+const RenderIfTrue = (props) => (props.if ? props.children : <noscript/>);
+
+RenderIfTrue.propTypes = {
+    if: React.PropTypes.bool.isRequired
+};
+
+export default RenderIfTrue;

@@ -22,8 +22,10 @@ import RestClient from './RestClient';
 
 const DefaultProperties = {native: false, platform: 'browser'};
 
-export default function (routes) {
+export default function (routesBuilder) {
     const fluxController = new FluxController(DefaultProperties);
+
+    const routes = routesBuilder(fluxController.appProperties);
 
     const fluxContext = fluxController.fluxContext;
 
