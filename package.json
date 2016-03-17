@@ -1,9 +1,8 @@
 {
   "name": "reactjs-web-boilerplate",
   "version": "1.0.6",
+  "repository": "git@github.com:360fy/reactjs-web-boilerplate.git",
   "description": "Boilerplate for react based isomorphic application",
-  "private": true,
-  "repository": "git+ssh://git-codecommit.us-east-1.amazonaws.com/v1/repos/reactjs-web-boilerplate",
   "scripts": {
     "lint": "eslint ./src/",
     "clean": "rm -rf lib/",
@@ -16,7 +15,6 @@
     "agentkeepalive": "^2.0.5",
     "bluebird": "^3.3.4",
     "classnames": "^2.2.3",
-    "eslint-config-360fy": "https://private-npm-releases.s3.amazonaws.com/eslint-config-360fy-1.0.1.tgz",
     "events": "^1.1.0",
     "immutable": "^3.7.6",
     "jquery": "^2.2.1",
@@ -36,7 +34,7 @@
     "babel-preset-node5": "^11.0.0",
     "babel-preset-react": "^6.5.0",
     "eslint": "^2.4.0",
-    "eslint-config-360fy": "https://private-npm-releases.s3.amazonaws.com/eslint-config-360fy-1.0.1.tgz",
+    "eslint-config-360fy": "^1.0.1",
     "eslint-plugin-react": "^4.2.3"
   },
   "eslintConfig": {
