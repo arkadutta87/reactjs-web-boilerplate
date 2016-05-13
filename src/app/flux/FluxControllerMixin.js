@@ -107,14 +107,14 @@ export default {
     componentWillMount() {
         //console.log('Mounting component: ', this);
         _.map(this.stores, (config, key) => {
-            const handler = config._storeUpdateHandlerWrapper = this.storeUpdateHandlerWrapper(key, config);
+            const handler = config.storeUpdateHandlerWrapper = this.storeUpdateHandlerWrapper(key, config);
             this.getStore(key).addUpdateListener(handler);
         });
     },
 
     componentWillUnmount() {
         _.map(this.stores, (storeConfig, storeKey) => {
-            const handler = storeConfig._storeUpdateHandlerWrapper;
+            const handler = storeConfig.storeUpdateHandlerWrapper;
             this.getStore(storeKey).removeUpdateListener(handler);
 
             // TODO: probably set some variable that tells store can be removed on unmount...
