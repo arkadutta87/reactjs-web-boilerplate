@@ -142,10 +142,9 @@ export default (routes, multiInstance, propertiesOrBuilder, api) => (req, res) =
             const markup = renderToString(<RouterContext {...renderProps} history={createHistory()} createElement={createFluxComponent}/>);
 
             res.render('index', {
-                title: properties && properties.title,
                 pageContent: markup,
                 fluxStoreContent: fluxController.renderToString(),
-                params: renderProps.params
+                properties
             });
         } else {
             res.status(404).send('Not found');
