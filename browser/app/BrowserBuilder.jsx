@@ -10,11 +10,10 @@ if (!window.jQuery.Velocity) {
 
 import 'velocity-animate/velocity.ui.js';
 
-import _ from 'lodash';
-
 import React from 'react';
 import { render } from 'react-dom';
-import { Router, browserHistory } from 'react-router';
+import { Router, useRouterHistory } from 'react-router';
+import { createHistory } from 'history';
 
 import FluxController from './../../lib/app/flux/FluxController';
 
@@ -37,6 +36,10 @@ export default function (routesBuilder) {
         withCredentials: true
     });
 
+    const history = useRouterHistory(createHistory)({
+        basename: fluxController.appProperties && fluxController.appProperties.get('baseUrl') || '/'
+    });
+
     const createFluxComponent = (Component, props) => <Component {...props} fluxController={fluxController}/>;
-    render((<Router history={browserHistory} createElement={createFluxComponent}>{routes}</Router>), document.getElementById('__page_root__'));
+    render((<Router history={history} createElement={createFluxComponent}>{routes}</Router>), document.getElementById('__page_root__'));
 }

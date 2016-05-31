@@ -125,7 +125,7 @@ export default (routes, multiInstance, propertiesOrBuilder, api) => (req, res) =
             let properties = propertiesOrBuilder;
             if (_.isFunction(propertiesOrBuilder)) {
                 try {
-                    properties = propertiesOrBuilder(renderProps.params);
+                    properties = propertiesOrBuilder(_.defaultsDeep({}, req.params, renderProps));
                 } catch (err) {
                     res.status(404).send('Not found');
                     return;
