@@ -33,7 +33,7 @@
     "babel-preset-node5": "11.1.0",
     "babel-preset-react": "6.5.0",
     "eslint": "2.11.1",
-    "eslint-config-360fy": "1.1.9",
+    "eslint-config-360fy": "1.1.10",
     "eslint-plugin-react": "5.1.1"
   },
   "eslintConfig": {
