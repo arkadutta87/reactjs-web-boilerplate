@@ -125,7 +125,7 @@ export default (routes, multiInstance, propertiesOrBuilder, api) => (req, res) =
             let properties = propertiesOrBuilder;
             if (_.isFunction(propertiesOrBuilder)) {
                 try {
-                    properties = propertiesOrBuilder(_.defaultsDeep({}, req.params, renderProps));
+                    properties = propertiesOrBuilder(_.defaultsDeep({X_PROXY_BASE: req.get('X-Proxy-Base'), X_INSTANCE_BASE: req.get('X-Instance-Base')}, req.params, renderProps));
                 } catch (err) {
                     res.status(404).send('Not found');
                     return;
