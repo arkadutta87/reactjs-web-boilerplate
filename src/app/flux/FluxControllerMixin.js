@@ -72,7 +72,7 @@ export default {
 
     registerStores(storeConfigs) {
         if (_.isArray(storeConfigs)) {
-            _.map(storeConfigs, (key) => this.registerStore(key));
+            _.map(storeConfigs, key => this.registerStore(key));
         } else if (_.isObject(storeConfigs)) {
             _.map(storeConfigs, (config, key) => this.registerStore(key, config));
         }
@@ -136,7 +136,7 @@ export default {
         return _.some(this.props, (value, key) => value !== nextProps[key])
           || _.some(nextProps, (value, key) => value !== this.props[key])
           || _.some(this.state, (value, key) => value !== nextState[key])
-          || _.some(nextState, (value, key) => !this.state && !_.isUndefined(value) || value !== this.state[key]);
+          || _.some(nextState, (value, key) => (!this.state && !_.isUndefined(value)) || value !== this.state[key]);
     },
 
     getStore(key) {
@@ -152,7 +152,6 @@ export default {
     },
 
     getStoreData(key) {
-        const store = this.getStore(key);
-        return !!store ? store.data : null;
+        return _.get(this.getStore(key), 'data', null);
     }
 };
