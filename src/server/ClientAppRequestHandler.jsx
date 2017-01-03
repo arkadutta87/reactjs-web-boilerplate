@@ -132,6 +132,12 @@ export default (routes, multiInstance, propertiesOrBuilder, api) => (req, res) =
                 }
             }
 
+            //adding user object to properties
+            if (req.__userContext__) {
+                console.log(`$$$$--- Inside FluxContext Setup --- ${JSON.stringify(req.__userContext__)}`);
+                properties = _.defaults(_.pick(req, '__userContext__', null), properties);
+            }
+
             const fluxController = new FluxController(properties);
             const fluxContext = fluxController.fluxContext;
 
